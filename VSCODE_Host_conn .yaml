@@ -1,0 +1,4 @@
+Host minkubeserver
+  HostName 54.196.186.130
+  User ec2-user
+  IdentityFile "C:\Users\yakub\Desktop\SALMAN\AWS_DevOps Notes\APPS\KEYPAIR_PEM.pem"

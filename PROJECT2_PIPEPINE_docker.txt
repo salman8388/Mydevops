@@ -1,0 +1,72 @@
+pipeline {
+    agent any
+    tools {
+        jdk 'jdk17'
+        nodejs 'nodejs'
+    }
+    environment {
+        SCANNER_HOME = tool 'mysonar'
+    }
+    stages {
+        stage('Clean WS') {
+            steps {
+               cleanWs()
+            }
+            
+        }
+        stage('code') {
+            steps {
+               git "https://github.com/salman8388/Zomato-Project.git"
+            }
+        }
+        stage('CQA') {
+            steps {
+                withSonarQubeEnv('mysonar') {
+                    sh """$SCANNER_HOME/bin/sonar-scanner \
+                    -Dsonar.projectName=zomato \
+                    -Dsonar.projectKey=zomato"""    
+                }
+            }
+        }
+        stage('nodejs') {
+            steps {
+                sh "npm install"
+            }
+        }
+        stage('OWASP') {
+            steps {
+                dependencyCheck additionalArguments: '--scan ./ --disableYarnAudit --disableNodeAudit', odcInstallation: 'DP-check'
+                dependencyCheckPublisher pattern: '**/dependency-check-report.xml'
+            }
+        }
+        stage('dockerimagebuild') {
+            steps {
+                sh "docker build -t salman8388/sayyad:zomato ."
+            }
+        }
+        stage('TrivyFileSystem') {
+            steps {
+                sh "trivy fs . > trivyfs.txt"
+            }
+        }
+        stage('imagescan') {
+            steps {
+                sh "trivy image salman8388/sayyad:zomato"
+            }
+        }
+        stage('DockerimagePush') {
+            steps {
+                script {
+                    withDockerRegistry(credentialsId: 'dockerhub') {
+                        sh "docker push salman8388/sayyad:zomato"
+                    }
+                }
+            }
+        }
+        stage('container') {
+            steps {
+                sh "docker run -itd --name cont1 -p 3000:3000 salman8388/sayyad:zomato"
+            }
+        }
+    }
+}

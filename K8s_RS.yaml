@@ -1,0 +1,20 @@
+---
+apiVersion: apps/v1
+kind: ReplicaSet
+metada:
+  name: sayyad
+spec:
+  replicas: 3
+  selector:
+    matchlabels:
+      app: Swiggy
+  template:
+    metadata:
+      labels:
+        app: swiggy
+    spec:
+      containers:
+        - name: cont-3
+          image: salman8388:sayyad/cycle
+          ports:
+            - containerPort: 80

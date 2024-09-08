@@ -1,0 +1,64 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('code') {
+            steps {
+                git "https://github.com/salman8388/static-cycle-website-jenkins-docker-.git"
+            }
+        }
+        stage('build') {
+            steps {
+                sh 'docker build -t salman8388/sayyad:cycle .'
+            }
+        }
+        stage("push") {
+            steps {
+                script {
+                    withDockerRegistry(credentialsId: 'dockerhub') {
+                        sh "docker push salman8388/sayyad:cycle"  
+                    }
+                }
+            }
+        }
+        stage('deploy') {
+            steps {
+                sh "docker run -itd --name cont1 -p 8081:80 salman8388/sayyad:cycle "   
+            }
+        }
+    }
+}
+
+
+similarly deploy with git hub source java code
+
+pipeline {
+    agent any
+
+    stages {
+        stage('code') {
+            steps {
+                git  "https://github.com/salman8388/one.git"
+            }
+        }
+        stage('build') {
+            steps {
+                sh "docker build -t salman8388/sayyad:one ."
+            }
+        }
+        stage('push') {
+            steps {
+                script {
+                  withDockerRegistry(credentialsId: 'dockerhub') {
+                    sh "docker push  salman8388/sayyad:one" 
+                   }  
+                }
+            }
+        }
+        stage('deploy') {
+            steps {
+                sh "docker run -itd --name two -p 8083:8080 salman8388/sayyad:one"
+            }
+        }
+    }
+}

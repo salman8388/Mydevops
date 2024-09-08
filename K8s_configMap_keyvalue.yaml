@@ -1,0 +1,20 @@
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-2
+spec:
+  containers:
+    - name: cont-2
+      image: nginx
+      env:
+        - name: flm
+          valueFrom:
+             configMapKeyRef:
+                key: trainer
+                name: firstcm
+        - name: course
+          valueFrom:
+             configMapKeyRef:
+                key: course
+                name: firstcm

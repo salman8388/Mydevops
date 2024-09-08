@@ -1,0 +1,62 @@
+In Git, both `rebase` and `merge` are used to integrate changes from one branch into another, but they do so in different ways, and each has its own implications for the commit history.
+
+### Merge:
+
+- **Purpose**: Combines changes from one branch (source branch) into another branch (target branch).
+- **Commit history**: Creates an additional commit (merge commit) in the target branch that ties together the histories of both branches.
+- **Usage**: 
+  ```bash
+  git checkout target_branch
+  git merge source_branch
+  ```
+- **Resulting history**: 
+  ```
+  *   Merge branch 'source_branch' into target_branch
+  |\
+  | * Commit A (source_branch)
+  * | Commit B (target_branch)
+  |/
+  * Commit C (common ancestor)
+  ```
+
+### Rebase:
+
+- **Purpose**: Moves or integrates a sequence of commits from one branch to another, typically to keep a cleaner, linear history.
+- **Commit history**: Rewrites the commit history of the source branch onto the target branch. It does not create a merge commit.
+- **Usage**: 
+  ```bash
+  git checkout source_branch
+  git rebase target_branch
+  ```
+- **Resulting history**: 
+  ```
+  * Commit B' (source_branch)   <-- Rewritten commit
+  * Commit A' (source_branch)   <-- Rewritten commit
+  * Commit C (target_branch)
+  ```
+
+### Key Differences:
+
+1. **Commit History**: 
+   - **Merge**: Preserves the commit history of both branches, creating a merge commit.
+   - **Rebase**: Rewrites the commit history of the source branch on top of the target branch, resulting in a linear history.
+
+2. **Branch Cleanliness**: 
+   - **Merge**: Maintains a more complex branch history with merge commits, showing when branches were integrated.
+   - **Rebase**: Provides a cleaner, linear history but can potentially lose the information about when a feature branch was merged into the main branch.
+
+3. **Use Cases**:
+   - **Merge**: Best for preserving the context of development branches and merging feature branches into a main branch.
+   - **Rebase**: Useful for keeping feature branches up to date with changes in the main branch and for creating a cleaner history for the main branch.
+
+4. **Collaboration**:
+   - **Merge**: Reflects the true nature of collaboration, showing when branches were integrated.
+   - **Rebase**: Should be used with caution in shared branches because it rewrites history, potentially causing conflicts for other collaborators.
+
+### When to Choose Each:
+
+- **Merge**: Use when you want to keep the context of how development occurred in separate branches and when collaborating with others to integrate features.
+  
+- **Rebase**: Use when you want to maintain a clean, linear history, especially for feature branches that are not yet shared or have a short lifespan. It's useful for integrating changes from the main branch into your feature branch to avoid large merge commits later.
+
+In summary, the choice between `rebase` and `merge` depends on your project's workflow, collaboration strategy, and how you want the commit history to appear. Both have their strengths and use cases, so understanding when to apply each method is key to effectively managing your Git workflow.

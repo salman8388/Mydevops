@@ -1,0 +1,30 @@
+DEVOPS branch commit
+[root@ip-172-31-95-106 sunny]# git log
+commit cd6912970ad45c499f3a6963d2689e97b040e1f7 (HEAD -> devops)
+Author: root <root@ip-172-31-95-106.ec2.internal>
+Date:   Fri Jul 19 12:57:14 2024 +0000
+
+    commits rcb
+
+commit 1ede1c4daea932a9d8bf42b9cd4180ab3e0b7699
+Author: root <root@ip-172-31-95-106.ec2.internal>
+Date:   Fri Jul 19 12:57:06 2024 +0000
+
+    commits dc
+
+commit 167f0334efa3c64000c9f8171bdaba0f6bdc06de (master)
+Author: root <root@ip-172-31-95-106.ec2.internal>
+Date:   Fri Jul 19 12:55:23 2024 +0000
+
+    commits srh
+
+commit 190c5dccb1f486190273a701c39670b6146e99e1
+Author: root <root@ip-172-31-95-106.ec2.internal>
+Date:   Fri Jul 19 12:55:11 2024 +0000
+
+    commits
+
+commit 310fa763f668b508f6c4a6ed06e37829ff5852ac (origin/master)
+Author: root <root@ip-172-31-95-106.ec2.internal>
+Date:   Fri Jul 19 11:55:29 2024 +0000
+gpasswd -d user group to remove a user from group

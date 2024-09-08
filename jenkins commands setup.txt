@@ -1,0 +1,58 @@
+amazon-linux-extras install java-openjdk11 -y
+sudo wget -O /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhat-stable/jenkins.repo
+sudo rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io-2023.key
+yum install jenkins -y
+systemctl start jenkins
+systemctl status Jenkins
+
+
+
+
+pipeline{
+    agent any
+    environment{
+        name="salman"
+        age=24
+    }
+    stages{
+        stage("name"){
+            steps{
+              echo "hi iam $name"  
+            }
+        }
+        stage("age"){
+            steps{
+                echo "my age is $age"
+            }
+        }
+        stage("p2"){
+            environment{
+                name="sayyad"
+            }
+            steps{
+                echo "hello iam $name iam using $cloud"
+            }
+        }
+    }
+    post{
+        always{
+            echo "pipeline prints anways"
+        }
+        success{
+            echo "if pipeline success"
+        }
+        failure{
+            echo "if pipeline fails"
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,24 @@
+FROM ubuntu
+MAINTAINER Name salman
+LABEL this is my first volume
+#RUN touch salman.txt
+#RUN apt update -y
+#RUN mkdir sayyad
+#RUN apt install git -y
+#RUN apt install maven -y
+#COPY index.html index.html
+#COPY index.html . 
+#ADD . /app
+#ADD https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.93/bin/apache-tomcat-9.0.93.tar.gz .
+#COPY https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.93/bin/apache-tomcat-9.0.93.tar.gz . (not works copy component for url in I.E)
+#ARG cloud=aws (Pass VARS,and acces vars wile build image through dynamically,not acces in containers)
+#ENV course=devops  (pass VARS,but not possible pass dynamicaly,acces those in containers)
+#RUN echo " i am learning $course with $cloud"
+#WORKDIR /sayyad/salman/pasha
+#RUN touch sayyad
+#RUN mkdir salman
+#CMD yum install git -y 
+#ENTRYPOINT  ["apt","install","-y"]
+#CMD ["git"] 
+#ENTRYPOINT  ["apt","install","-y","maven"]
+VOLUME ["/pasha"]

@@ -1,0 +1,14 @@
+--
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv1
+spec:
+  capacity:
+    storage: 7Gi
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy:  Recyle
+  awsElasticBlockstore:
+     volumeID: vol-09caab4bad64b1291
+     fsType: ext4
